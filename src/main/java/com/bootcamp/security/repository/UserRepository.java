@@ -1,6 +1,7 @@
 package com.bootcamp.security.repository;
 
 import com.bootcamp.security.user.User;
+import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
