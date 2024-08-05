@@ -31,10 +31,9 @@ public class Appointment {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "appointment_date")
-    Timestamp appointmentDate;
+    private LocalDateTime appointmentTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doctor_id")
+    @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 }

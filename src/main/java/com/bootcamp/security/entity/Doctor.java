@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -30,6 +29,14 @@ public class Doctor {
     @Column(name = "location")
     private String location;
 
+    @Column(name = "fees")
+    private String fees;
+
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "procedures")
+    private List<Procedures> prodedures;
+
+    //    @Column(name = "appointment_id")
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointment;
 

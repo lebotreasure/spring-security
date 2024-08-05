@@ -1,5 +1,6 @@
 package com.bootcamp.security.controller;
 
+import com.bootcamp.security.entity.Appointment;
 import com.bootcamp.security.entity.Doctor;
 import com.bootcamp.security.service.DoctorServiceImpl;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -20,6 +22,12 @@ public class DoctorController {
 
     @Autowired
     private DoctorServiceImpl doctorService;
+
+    @GetMapping("/{doctorId}/appointments")
+    public List<Appointment> getAppointmentsForDoctor(@PathVariable Long doctorId, @RequestParam String date) {
+        LocalDateTime localDate = LocalDateTime.parse(date);
+        return doctorService.getAppointmentsForDoctor(doctorId, localDate);
+    }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
@@ -43,8 +51,8 @@ public class DoctorController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/{id}")
-    public ResponseEntity<Doctor> updateDoctor(@PathVariable Long id, @RequestBody Doctor category) {
-        return ResponseEntity.ok(doctorService.updateDoctor(id, category));
+    public ResponseEntity<Doctor> updateDoctor(@PathVariable Long id, @RequestBody Doctor doctor) {
+        return ResponseEntity.ok(doctorService.updateDoctor(id, doctor));
     }
 
     @CrossOrigin(origins = "http://localhost:4200")

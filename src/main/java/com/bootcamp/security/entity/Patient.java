@@ -20,4 +20,5 @@ public class Patient {
     private String city;
     private String age;
     private String gender;
+    private String blood_group;
 }
